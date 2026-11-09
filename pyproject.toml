@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "test-data-management-harness"
+version = "2.0.0"
+description = "Enterprise Test Data Management & Quality Engineering Control Plane: Feistel FPE (FF3-1 inspired), Tarjan SCC Subsetting, k-Anonymity & Privacy Budget Tracking, In-Memory SQLite Snapshots, IPOG Pairwise QE, FinOps, AI Governance & MCP Server."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+authors = [{ name = "abul-lab" }]
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+  "pydantic>=2.9",
+  "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3",
+  "ruff>=0.6",
+  "mypy>=1.11",
+  "pip-audit>=2.7",
+]
+
+[project.scripts]
+tdm-guard = "src.cli:main"
+
+[tool.setuptools]
+packages = [
+  "src",
+  "src.engine",
+  "src.governance",
+  "src.api",
+  "src.privacy",
+  "src.subsetting",
+  "src.quality",
+  "src.ai",
+  "src.mcp",
+  "src.healthexpress",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 115
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+packages = ["src"]
+ignore_missing_imports = true
+disallow_untyped_defs = true
+
