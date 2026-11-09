@@ -2,7 +2,7 @@
 
 **Enterprise Test Data Management & Quality Engineering Control Plane: Feistel Format-Preserving Cipher (FF3-1 Inspired), Tarjan SCC Graph Subsetting, $k$-Anonymity & Privacy Budget Tracking, In-Memory SQLite Snapshots, IPOG Pairwise QE, FinOps, AI Governance & MCP Server**
 
-[![CI](https://img.shields.io/badge/CI-ruff%20%7C%20mypy%20%7C%20pytest%20(23%20passed)-059669)](#verified-test-suite)
+[![CI](https://img.shields.io/badge/CI-ruff%20%7C%20mypy%20%7C%20pytest-059669)](#verified-test-suite)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-1d4ed8)](#quick-start--cli-usage)
 [![Crypto](https://img.shields.io/badge/Crypto-Feistel_FPE_%7C_Merkle_Audit-5b21b6)](#core-modules--capabilities)
 [![MCP](https://img.shields.io/badge/Agentic_QE-MCP_JSON--RPC_2.0-059669)](#ephemeral-cicd--enterprise-control-plane-api)
@@ -10,15 +10,22 @@
 
 > **Executive Architecture Summary**
 >
-> Legacy Test Data Management (TDM) models stall enterprise delivery by relying on slow, risk-heavy staging database clones, naive column masking that breaks foreign-key joins, and manual ticket-driven provisioning. `Test-Data-Management-Harness` (`Test-Data-Management-Platform` v2.0) shifts TDM and Quality Engineering left into a unified, code-native control plane:
+> Legacy Test Data Management (TDM) models stall enterprise delivery by relying on slow, risk-heavy staging database clones, naive column masking that breaks foreign-key joins, and manual ticket-driven provisioning. `Test-Data-Management-Platform` v2.0 shifts TDM and Quality Engineering left into a unified, code-native control plane:
 >
-> - **Tier 1 (Enterprise TDM Core):** Automated catalog discovery, Inclusion-Dependency implicit foreign-key inference, **Tarjan Strongly Connected Components (SCC)** referential subsetting, **Custom Format-Preserving Cipher using an 8-round Feistel structure and HMAC-SHA256 PRF (FF3-1 inspired)** unified via Union-Find equivalence classes, quantitative **$k$-Anonymity / Entropy $\ell$-Diversity / Privacy Budget Accounting (*Note: no formal Differential Privacy noise mechanism is currently implemented*)**, **Policy-as-Code Guards** with **Dual-Approval Workflow with HMAC Verification**, and **Merkle-Backed Audit Log + OpenLineage 1.0 Provenance**.
+> - **Tier 1 (Enterprise TDM Core):** Automated catalog discovery, Inclusion-Dependency implicit foreign-key inference, **Tarjan Strongly Connected Components (SCC)** referential subsetting, **Educational Feistel-based format-preserving pseudonymization (8 rounds, HMAC-SHA256 PRF; not a vetted FPE, see [Security Scope](#security-scope))** unified via Union-Find equivalence classes, quantitative **$k$-Anonymity / Entropy $\ell$-Diversity / Privacy Budget Accounting (*Note: no formal Differential Privacy noise mechanism is currently implemented*)**, **Policy-as-Code Guards** with **Dual-Approval Workflow with HMAC Verification**, and **Merkle-Backed Audit Log + OpenLineage 1.0 Provenance**.
 > - **Tier 2 (Quality Intelligence, Polyglot & FinOps):** Ephemeral in-memory SQLite sandboxes with **in-memory snapshot restore via the SQLite Online Backup API**, synchronized **Kafka CloudEvents streams + WireMock REST contract stubs**, **IPOG $t=2$ Pairwise Combinatorial & Boundary Chaos synthesis**, **FinOps memory/utilization metering**, and an executive **Release Readiness evaluator**.
 > - **Tier 3 (Next-Gen AI Governance & Agentic QE):** **Neuro-Symbolic Constraint-Guided Incident Reproduction** (Synthetic Incident Twins), **NIST AI RMF-inspired statistical fidelity evaluation (KS, TVD, DCR, NNDR)**, and a native **Model Context Protocol (MCP) JSON-RPC 2.0 Server** with an **Outbound Agentic DLP Firewall**.
 
 ![Test Data Management Harness v2.0 — Overview & Release Readiness Gate](docs/images/tdm-overview.jpg)
 
 ---
+
+## Security Scope
+
+- **Not for protecting production PII or PCI data.** The cipher is a custom Feistel construction inspired by FF3-1. It is not NIST-validated and has not been independently reviewed.
+- **For production format-preserving encryption,** use a vetted implementation of NIST FF1 or FF3-1 and manage keys in a KMS or HSM.
+- **Dual approvals and audit entries** use symmetric HMAC-SHA256 tags, not digital signatures.
+- **Intended use:** generating and protecting non-production test data, and demonstrating test data governance patterns.
 
 ## Engineering Maturity & Capability Status
 
@@ -284,7 +291,7 @@ pytest -v
 ## Repository Structure
 
 ```text
-Test-Data-Management-Harness/
+Test-Data-Management-Platform/
 ├── README.md
 ├── LICENSE
 ├── SECURITY.md
